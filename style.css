@@ -1,0 +1,197 @@
+/* Reset & base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Map full screen */
+#map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Header as centered card */
+#header {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 760px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #1d3557;
+  font-family: 'Poppins', sans-serif;
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  z-index: 3;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+#header h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+#header p {
+  font-size: 13px;
+  margin-top: 4px;
+  color: #475569;
+}
+
+/* Controls bar */
+#controls {
+  position: absolute;
+  top: 95px;   /* leave space under header */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  padding: 8px 12px;    /* slimmer bar */
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#controls input,
+#controls select {
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  height: 36px;         /* equal height */
+}
+
+/* Language switch buttons */
+#langSwitch { display: flex; gap: 6px; align-items: center; margin-right: 2px; }
+.lang-btn {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+  padding: 6px 12px;       /* 横向 padding 稍微加大 */
+  border-radius: 7px;
+  font: 500 13px 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: filter .2s ease;
+  min-width: 46px;         /* 保证 EN 和 中文 都能一行显示 */
+  white-space: nowrap;     /* 不允许换行 */
+  text-align: center;      /* 文本居中 */
+}
+.lang-btn.active {
+  background: #1d4ed8;
+  color: #fff;
+  border-color: #1d4ed8;
+}
+.lang-btn:hover { filter: brightness(0.96); }
+
+/* Plan button */
+#routeBtn {
+  background: linear-gradient(90deg, #1da1f2, #0d8ddb);
+  border: none;
+  color: #fff;
+  padding: 10px 28px;   /* wider button */
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  min-width: 145px;
+  height: 38px;
+  transition: background .3s ease;
+}
+#routeBtn:hover {
+  background: linear-gradient(90deg, #0d8ddb, #1da1f2);
+}
+
+/* Info pill */
+#info {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 18px;
+  font-weight: 600;
+  color: #334155;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+  max-width: 90%;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+.modal.show {            /* toggle to show */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 22px 26px;
+  border-radius: 12px;
+  width: 86%;
+  max-width: 580px;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+  animation: fadeIn .25s ease-in-out;
+}
+.modal-content h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #1d3557;
+}
+.modal-content h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin: 10px 0 6px;
+  color: #1f2937;
+}
+.modal-content p, .modal-content ul {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #374151;
+}
+.modal-content ul { padding-left: 18px; margin: 10px 0; }
+.modal-content li { margin-bottom: 6px; }
+
+.modal-content .dontshow {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.modal-buttons { text-align: center; margin-top: 18px; }
+.modal-buttons button {
+  padding: 8px 16px;
+  background: #1da1f2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+.modal-buttons button:hover { background: #0d8ddb; }
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
