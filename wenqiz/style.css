@@ -17,16 +17,16 @@ html, body {
 /* Header as centered card */
 #header {
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 960px;
+  max-width: 980px;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   color: #1d3557;
   font-family: 'Poppins', sans-serif;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
   z-index: 3;
@@ -34,11 +34,11 @@ html, body {
   border: 1px solid #e5e7eb;
 }
 #header h1 {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
 }
 #header p {
-  font-size: 12.5px;
+  font-size: 12px;
   margin-top: 4px;
   color: #475569;
 }
@@ -145,7 +145,7 @@ html, body {
   padding: 20px 24px;
   border-radius: 12px;
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   font-family: 'Roboto', sans-serif;
   box-shadow: 0 8px 22px rgba(0,0,0,0.28);
   animation: fadeIn .25s ease-in-out;
@@ -194,4 +194,10 @@ html, body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px){
+  #header{ max-width:92vw; padding:8px 12px; }
+  #header h1{ font-size:17px; }
+  #header p{ font-size:12px; }
+  .modal-content{ width:84%; max-width:360px; }
 }
