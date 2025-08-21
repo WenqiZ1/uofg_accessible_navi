@@ -15,58 +15,61 @@ html, body {
 }
 
 /* Header as centered card */
-#header {
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 760px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #1d3557;
-  font-family: 'Poppins', sans-serif;
-  padding: 14px 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  z-index: 3;
-  text-align: center;
-  border: 1px solid #e5e7eb;
+/* 标题卡片：更瘦长，字号更小，让一行能容纳更多文字 */
+#header{
+  position:absolute;
+  top:8px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:960px;            /* 原 750px → 960px，更宽更“长” */
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  color:#1d3557;
+  font-family:'Poppins',sans-serif;
+  padding:10px 16px;          /* 原 14px 20px，更薄 */
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.2);
+  z-index:3; text-align:center; border:1px solid #ddd;
 }
-#header h1 {
-  font-size: 20px;
-  font-weight: 600;
+#header h1{
+  font-size:19px;             /* 原 20–22px，略小一号 */
+  line-height:1.25;
+  margin:0;
+  font-weight:600;
+  letter-spacing:.2px;
+  word-break:keep-all;
+  white-space:normal;         /* 允许必要时自然换行 */
 }
-#header p {
-  font-size: 13px;
-  margin-top: 4px;
-  color: #475569;
+#header p{
+  font-size:12.5px;           /* 原 13–14px */
+  margin-top:4px; color:#444;
 }
 
-/* Controls bar */
-#controls {
-  position: absolute;
-  top: 95px;   /* leave space under header */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-  padding: 8px 12px;    /* slimmer bar */
-  z-index: 2;
-  display: flex;
-  gap: 10px;
-  align-items: center;
+/* 控件栏跟着上移一点，避免遮挡 */
+#controls{
+  position:absolute;
+  top:86px;                   /* 原 95px，因标题变薄而上移 */
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  padding:8px 12px;
+  z-index:2; display:flex; gap:10px; align-items:center;
 }
-#controls input,
-#controls select {
-  padding: 6px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  background-color: #fff;
-  font-family: 'Roboto', sans-serif;
-  height: 36px;         /* equal height */
+
+/* 语言按钮防换行（你已加过，可留存） */
+.lang-btn{ white-space:nowrap; }
+
+/* 响应式微调：小屏进一步减小字体 */
+@media (max-width: 768px){
+  #header{ max-width:92vw; padding:8px 12px; }
+  #header h1{ font-size:17px; }
+  #header p{ font-size:12px; }
+  .modal-content{ width:84%; max-width:360px; }
 }
+
 
 /* Language switch buttons */
 #langSwitch { display: flex; gap: 6px; align-items: center; margin-right: 2px; }
@@ -128,67 +131,43 @@ html, body {
 }
 
 /* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 50;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
+/* 弹窗层：保持不变 */
+.modal { display:none; position:fixed; z-index:50; left:0; top:0; width:100%; height:100%;
+  background:rgba(0,0,0,.45);
 }
-.modal.show {            /* toggle to show */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal-content {
-  background: #fff;
-  padding: 22px 26px;
-  border-radius: 12px;
-  width: 86%;
-  max-width: 580px;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.28);
-  animation: fadeIn .25s ease-in-out;
-}
-.modal-content h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 22px;
-  margin-bottom: 12px;
-  color: #1d3557;
-}
-.modal-content h3 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  margin: 10px 0 6px;
-  color: #1f2937;
-}
-.modal-content p, .modal-content ul {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #374151;
-}
-.modal-content ul { padding-left: 18px; margin: 10px 0; }
-.modal-content li { margin-bottom: 6px; }
+.modal.show { display:flex; align-items:center; justify-content:center; }
 
-.modal-content .dontshow {
-  display: block;
-  margin-top: 12px;
-  font-size: 14px;
-  color: #374151;
+/* 👉 更紧凑的弹窗内容 */
+.modal-content{
+  background:#fff;
+  padding:16px 20px;          /* 原 20px 30px，缩小内边距 */
+  border-radius:12px;
+  width:64%;                  /* 原 80%，整体更窄 */
+  max-width:420px;            /* 原 550px，弹窗更小 */
+  box-shadow:0 6px 15px rgba(0,0,0,.25);
+  animation:fadeIn .22s ease-in-out;
+  font-family:'Roboto',sans-serif;
 }
+.modal-content h2{
+  font-family:'Poppins',sans-serif;
+  font-size:18px;             /* 原 22px，标题更小 */
+  margin:0 0 8px 0;
+  color:#1d3557;
+  line-height:1.25;
+}
+.modal-content p,
+.modal-content ul{font-size:14px; line-height:1.55;}
+.modal-content ul{padding-left:16px; margin:8px 0;}
+.modal-content li{margin-bottom:4px;}
 
-.modal-buttons { text-align: center; margin-top: 18px; }
-.modal-buttons button {
-  padding: 8px 16px;
-  background: #1da1f2;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+.modal-buttons{ text-align:center; margin-top:14px; }
+.modal-buttons button{
+  padding:7px 14px;           /* 原 8px 16px */
+  background:#1da1f2; color:#fff; border:0; border-radius:6px;
+  cursor:pointer; font:600 13.5px 'Poppins',sans-serif;
 }
-.modal-buttons button:hover { background: #0d8ddb; }
+.modal-buttons button:hover{ background:#0d8ddb; }
+
 
 /* Animation */
 @keyframes fadeIn {
